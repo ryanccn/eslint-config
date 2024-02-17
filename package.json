@@ -1,0 +1,53 @@
+{
+  "name": "@ryanccn/eslint-config",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A personal ESLint flat config preset",
+  "license": "MIT",
+  "homepage": "https://github.com/ryanccn/eslint-config#readme",
+  "bugs": {
+    "url": "https://github.com/ryanccn/eslint-config/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanccn/eslint-config.git"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "dist/"
+  ],
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "watch": "tsup --watch",
+    "build": "tsup",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@eslint/js": "^8.56.0",
+    "@stylistic/eslint-plugin": "^1.6.2",
+    "@typescript-eslint/utils": "^7.0.1",
+    "@unocss/eslint-config": "^0.58.5",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-unicorn": "^51.0.1",
+    "globals": "^14.0.0",
+    "typescript-eslint": "^7.0.1"
+  },
+  "peerDependencies": {
+    "eslint": "^8.56.0"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.40.1",
+    "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@types/eslint": "^8.56.2",
+    "eslint": "^8.56.0",
+    "tsup": "^8.0.2"
+  },
+  "packageManager": "pnpm@8.15.3"
+}
