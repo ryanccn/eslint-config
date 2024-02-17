@@ -1,9 +1,14 @@
-import unicornPlugin from 'eslint-plugin-unicorn';
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 
-const unicorn = (): FlatConfig.Config[] => {
+import { ensurePackages, interopDefault } from '../utils.js';
+
+const unicorn = async (): Promise<FlatConfig.Config[]> => {
+  ensurePackages('eslint-plugin-unicorn');
+
+  const plugin = await interopDefault(import('eslint-plugin-unicorn'));
+
   return [
-    unicornPlugin.configs['flat/recommended'],
+    plugin.configs['flat/recommended'],
 
     {
       rules: {

@@ -1,16 +1,17 @@
-import tsPlugin from 'typescript-eslint';
-import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
+import type { FlatConfig, ParserOptions } from '@typescript-eslint/utils/ts-eslint';
 
+import { ensurePackages, interopDefault } from '../utils.js';
 import { globs } from '../globs.js';
 
-interface TypeScriptOptions {
-  project?: boolean | string[];
-  tsconfigRootDir?: string;
-}
+interface TypeScriptOptions extends ParserOptions {}
 
-const typescript = (options?: TypeScriptOptions): FlatConfig.Config[] => {
+const typescript = async (options?: TypeScriptOptions): Promise<FlatConfig.Config[]> => {
+  ensurePackages('typescript-eslint');
+
+  const plugin = await interopDefault(import('typescript-eslint'));
+
   return [
-    ...tsPlugin.configs.recommendedTypeChecked,
+    ...plugin.configs.recommendedTypeChecked,
 
     {
       languageOptions: {
@@ -23,7 +24,7 @@ const typescript = (options?: TypeScriptOptions): FlatConfig.Config[] => {
 
     {
       files: globs.javascript,
-      rules: tsPlugin.configs.disableTypeChecked.rules,
+      rules: plugin.configs.disableTypeChecked.rules,
     },
   ];
 };

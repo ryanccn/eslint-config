@@ -1,12 +1,15 @@
-import stylisticPlugin, { type StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
+import { ensurePackages, interopDefault } from '../utils.js';
+
+import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
 
-const stylistic = (
-  options?: StylisticCustomizeOptions,
-): FlatConfig.Config[] => {
+const stylistic = async (options?: StylisticCustomizeOptions): Promise<FlatConfig.Config[]> => {
+  ensurePackages('@stylistic/eslint-plugin');
+
+  const plugin = await interopDefault(import('@stylistic/eslint-plugin'));
   return [
     // @ts-expect-error incompatible config types
-    stylisticPlugin.configs.customize({
+    plugin.configs.customize({
       indent: 2,
       quotes: 'single',
       semi: true,
