@@ -1,32 +1,42 @@
-import type { FlatConfig, ParserOptions } from '@typescript-eslint/utils/ts-eslint';
+import type { ConfigPart } from './_types.js';
+import type { ParserOptions } from '@typescript-eslint/utils/ts-eslint';
+import type { FlatESLintConfig } from 'eslint-define-config';
 
 import { ensurePackages, interopDefault } from '../utils.js';
+
 import { globs } from '../globs.js';
 
 interface TypeScriptOptions extends ParserOptions {}
 
-const typescript = async (options?: TypeScriptOptions): Promise<FlatConfig.Config[]> => {
-  ensurePackages('typescript-eslint');
+const typescript: ConfigPart = async (options) => {
+	ensurePackages('typescript-eslint');
 
-  const plugin = await interopDefault(import('typescript-eslint'));
+	const plugin = await interopDefault(import('typescript-eslint'));
 
-  return [
-    ...plugin.configs.recommendedTypeChecked,
+	const project = typeof options.typescript === 'boolean' ? true : options.typescript.project ?? true;
+	const tsconfigRootDir = typeof options.typescript === 'boolean' ? undefined : options.typescript.tsconfigRootDir;
 
-    {
-      languageOptions: {
-        parserOptions: {
-          project: options?.project ?? true,
-          tsconfigRootDir: options?.tsconfigRootDir,
-        },
-      },
-    },
+	const extraFileExtensions = [];
+	if (options.svelte === true) extraFileExtensions.push('.svelte');
 
-    {
-      files: globs.javascript,
-      rules: plugin.configs.disableTypeChecked.rules,
-    },
-  ];
+	return [
+		...plugin.configs.recommendedTypeChecked as FlatESLintConfig[],
+
+		{
+			languageOptions: {
+				parserOptions: {
+					project,
+					tsconfigRootDir,
+					extraFileExtensions,
+				},
+			},
+		},
+
+		{
+			files: globs.javascript,
+			rules: plugin.configs.disableTypeChecked.rules,
+		},
+	];
 };
 
 export { typescript, TypeScriptOptions };

@@ -1,5 +1,6 @@
 import { config } from './dist/index.js';
 
 export default config({
-  stylistic: true,
+	globals: ['node'],
+	stylistic: true,
 });

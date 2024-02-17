@@ -27,38 +27,60 @@
   "scripts": {
     "watch": "tsup --watch",
     "build": "tsup",
-    "lint": "eslint ."
+    "check": "tsc -noEmit",
+    "lint": "eslint .",
+    "check-peers": "node --no-warnings check-peers.js"
   },
   "dependencies": {
     "@typescript-eslint/utils": "^7.0.1",
+    "eslint-define-config": "^2.1.0",
     "globals": "^14.0.0",
     "kleur": "^4.1.5",
     "local-pkg": "^0.5.0"
   },
   "peerDependencies": {
+    "@eslint/eslintrc": "^3.0.1",
     "@eslint/js": "^8.56.0",
+    "@next/eslint-plugin-next": "^14.1.0",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@unocss/eslint-config": "^0.58.5",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-svelte": "^2.35.1",
     "eslint-plugin-unicorn": "^51.0.1",
+    "svelte": "^4.2.11",
+    "svelte-eslint-parser": "^0.33.1",
     "typescript-eslint": "^7.0.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.0.1",
     "@eslint/js": "^8.56.0",
     "@microsoft/eslint-formatter-sarif": "^3.0.0",
+    "@next/eslint-plugin-next": "^14.1.0",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@types/eslint": "^8.56.2",
     "@types/node": "^20.11.19",
     "@unocss/eslint-config": "^0.58.5",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-svelte": "^2.35.1",
     "eslint-plugin-unicorn": "^51.0.1",
+    "svelte": "^4.2.11",
+    "svelte-eslint-parser": "^0.33.1",
     "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
     "typescript-eslint": "^7.0.1"
   },
   "peerDependenciesMeta": {
+    "@eslint/eslintrc": {
+      "optional": true
+    },
     "@eslint/js": {
+      "optional": true
+    },
+    "@next/eslint-plugin-next": {
       "optional": true
     },
     "@stylistic/eslint-plugin": {
@@ -70,7 +92,19 @@
     "eslint-config-prettier": {
       "optional": true
     },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-svelte": {
+      "optional": true
+    },
     "eslint-plugin-unicorn": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "svelte-eslint-parser": {
       "optional": true
     },
     "typescript-eslint": {

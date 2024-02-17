@@ -1,135 +1,103 @@
-import type { FlatConfig } from '@typescript-eslint/utils/ts-eslint';
+import type { FlatESLintConfig, LanguageOptions } from 'eslint-define-config';
 
-import { globs } from './globs.js';
+import { autoDetect } from './autoDetect.js';
 
 import { javascript } from './parts/javascript.js';
-import { typescript, type TypeScriptOptions } from './parts/typescript.js';
+import { typescript } from './parts/typescript.js';
 import { unicorn } from './parts/unicorn.js';
 
-import { stylistic, type StylisticOptions } from './parts/stylistic.js';
+import { stylistic } from './parts/stylistic.js';
 import { prettier } from './parts/prettier.js';
 
+import { svelte } from './parts/svelte.js';
 import { unocss } from './parts/unocss.js';
+import { reactHooks } from './parts/reactHooks.js';
+import { next } from './parts/next.js';
 
+import { resolveOptions, type UserOptions, type GlobalName } from './config.js';
 import globals from 'globals';
-type GlobalName = keyof typeof globals;
 
-interface Options {
-  ignores?: string[];
-  globals?: GlobalName[];
+const getGlobals = (names: GlobalName[]): LanguageOptions['globals'] => {
+	let thisGlobals: LanguageOptions['globals'] = {};
 
-  javascript?: boolean;
-  typescript?: boolean | TypeScriptOptions;
-  unicorn?: boolean;
+	for (const global of names) {
+		thisGlobals = { ...thisGlobals, ...globals[global] };
+	}
 
-  stylistic?: boolean | StylisticOptions;
-  prettier?: boolean;
-
-  unocss?: boolean;
-
-  rules?: FlatConfig.Rules;
-}
-
-interface ResolvedOptions {
-  ignores: string[];
-  globals: GlobalName[];
-
-  javascript: boolean;
-  typescript: boolean | TypeScriptOptions;
-  unicorn: boolean;
-
-  stylistic: boolean | StylisticOptions;
-  prettier: boolean;
-
-  unocss: boolean;
-
-  rules?: FlatConfig.Rules;
-}
-
-const resolveOptions = (options?: Options): ResolvedOptions => {
-  return {
-    ignores: [...globs.ignore, ...(options?.ignores ?? [])],
-    globals: options?.globals ?? ['es2021'],
-
-    javascript: options?.javascript ?? true,
-    typescript: options?.typescript ?? true,
-    unicorn: options?.unicorn ?? true,
-
-    stylistic: options?.stylistic ?? false,
-    prettier: !options?.stylistic && (options?.prettier ?? true),
-
-    unocss: options?.unocss ?? false,
-
-    rules: options?.rules,
-  };
-};
-
-const getGlobals = (names: GlobalName[]): FlatConfig.GlobalsConfig => {
-  let thisGlobals: FlatConfig.GlobalsConfig = {};
-
-  for (const global of names) {
-    thisGlobals = { ...thisGlobals, ...globals[global] };
-  }
-
-  return thisGlobals;
+	return thisGlobals;
 };
 
 const pushPart = async (
-  configArray: FlatConfig.Config[],
-  newConfigs: FlatConfig.Config[] | Promise<FlatConfig.Config[]>,
+	configArray: FlatESLintConfig[],
+	newConfigs: FlatESLintConfig[] | Promise<FlatESLintConfig[]>,
 ) => {
-  const resolvedNewConfigs = await newConfigs;
-  configArray.push(...resolvedNewConfigs);
+	const resolvedNewConfigs = await newConfigs;
+	configArray.push(...resolvedNewConfigs);
 };
 
-const config = async (options?: Options): Promise<FlatConfig.Config[]> => {
-  const resolvedOptions = resolveOptions(options);
+const config = async (options?: UserOptions): Promise<FlatESLintConfig[]> => {
+	autoDetect(options);
+	const resolvedOptions = resolveOptions(options);
 
-  const ret: FlatConfig.Config[] = [];
+	const ret: FlatESLintConfig[] = [];
 
-  if (resolvedOptions.ignores && resolvedOptions.ignores.length > 0) {
-    ret.push({ ignores: resolvedOptions.ignores });
-  }
+	if (resolvedOptions.ignores && resolvedOptions.ignores.length > 0) {
+		ret.push({ ignores: resolvedOptions.ignores });
+	}
 
-  ret.push({
-    languageOptions: {
-      globals: getGlobals(resolvedOptions.globals),
-    },
-  });
+	if (resolvedOptions.globals && resolvedOptions.globals.length > 0) {
+		ret.push({
+			languageOptions: {
+				globals: getGlobals(resolvedOptions.globals),
+			},
+		});
+	}
 
-  if (resolvedOptions.javascript === true) {
-    await pushPart(ret, javascript());
-  }
+	if (resolvedOptions.javascript !== false) {
+		await pushPart(ret, javascript(resolvedOptions));
+	}
 
-  if (resolvedOptions.typescript === true) {
-    await pushPart(ret, typescript());
-  } else if (resolvedOptions.typescript !== false) {
-    await pushPart(ret, typescript(resolvedOptions.typescript));
-  }
+	if (resolvedOptions.typescript !== false) {
+		await pushPart(ret, typescript(resolvedOptions));
+	}
 
-  if (resolvedOptions.unicorn === true) {
-    await pushPart(ret, unicorn());
-  }
+	if (resolvedOptions.unicorn !== false) {
+		await pushPart(ret, unicorn(resolvedOptions));
+	}
 
-  if (resolvedOptions.unocss === true) {
-    await pushPart(ret, unocss());
-  }
+	if (resolvedOptions.svelte !== false) {
+		await pushPart(ret, svelte(resolvedOptions));
+	}
 
-  if (resolvedOptions.stylistic === true) {
-    await pushPart(ret, stylistic());
-  } else if (resolvedOptions.stylistic !== false) {
-    await pushPart(ret, stylistic(resolvedOptions.stylistic));
-  }
+	if (resolvedOptions.unocss !== false) {
+		await pushPart(ret, unocss(resolvedOptions));
+	}
 
-  if (resolvedOptions.prettier === true) {
-    await pushPart(ret, prettier());
-  }
+	if (resolvedOptions.next !== false) {
+		await pushPart(ret, next(resolvedOptions));
+	}
 
-  if (resolvedOptions.rules !== undefined) {
-    ret.push({ rules: resolvedOptions.rules });
-  }
+	if (resolvedOptions.reactHooks !== false) {
+		await pushPart(ret, reactHooks(resolvedOptions));
+	}
 
-  return ret;
+	if (resolvedOptions.stylistic !== false) {
+		await pushPart(ret, stylistic(resolvedOptions));
+	}
+
+	if (resolvedOptions.prettier !== false) {
+		await pushPart(ret, prettier(resolvedOptions));
+	}
+
+	if (resolvedOptions.rules !== undefined) {
+		ret.push({ rules: resolvedOptions.rules });
+	}
+
+	if (resolvedOptions.extraConfigs) {
+		ret.push(...resolvedOptions.extraConfigs);
+	}
+
+	return ret;
 };
 
 export { config };
@@ -141,4 +109,7 @@ export { unicorn } from './parts/unicorn.js';
 export { stylistic } from './parts/stylistic.js';
 export { prettier } from './parts/prettier.js';
 
+export { svelte } from './parts/svelte.js';
 export { unocss } from './parts/unocss.js';
+export { reactHooks } from './parts/reactHooks.js';
+export { next } from './parts/next.js';

@@ -1,26 +1,28 @@
 export const globs = {
-  javascript: ['**/*.{js,mjs,cjs}'],
-  typescript: ['**/*.{ts,mts,cts}'],
+	javascript: ['**/*.{js,mjs,cjs}'],
+	typescript: ['**/*.{ts,mts,cts}'],
 
-  ignore: [
-    '**/node_modules',
-    '**/dist',
+	svelte: ['**/*.svelte'],
 
-    '**/package-lock.json',
-    '**/yarn.lock',
-    '**/pnpm-lock.yaml',
-    '**/bun.lockb',
+	ignore: [
+		'**/node_modules',
+		'**/dist',
 
-    '**/.next',
-    '**/.nuxt',
-    '**/.vercel',
-    '**/.changeset',
-    '**/.cache',
-    '**/.output',
+		'**/package-lock.json',
+		'**/yarn.lock',
+		'**/pnpm-lock.yaml',
+		'**/bun.lockb',
 
-    '**/.vscode',
-    '**/.idea',
+		'**/.next',
+		'**/.nuxt',
+		'**/.vercel',
+		'**/.changeset',
+		'**/.cache',
+		'**/.output',
 
-    '**/LICENSE*',
-  ],
+		'**/.vscode',
+		'**/.idea',
+
+		'**/LICENSE*',
+	],
 };
