@@ -1,8 +1,15 @@
 /* eslint-disable unicorn/no-process-exit */
 
 import { bold, green, red } from 'kleur/colors';
+import { readFile } from 'node:fs/promises';
 
-const { default: pkg } = await import('./package.json', { with: { type: 'json' } });
+interface PackageJson {
+	peerDependencies: Record<string, string>;
+	peerDependenciesMeta: Record<string, { optional?: boolean }>;
+}
+
+const pkg = await readFile('package.json', { encoding: 'utf8' })
+	.then((r) => JSON.parse(r) as PackageJson);
 const safelist = new Set(['eslint']);
 
 let allGood = true;
@@ -11,7 +18,7 @@ for (const dep in pkg.peerDependencies) {
 	if (
 		!safelist.has(dep)
 		&& (!(dep in pkg.peerDependenciesMeta)
-		|| pkg.peerDependenciesMeta[dep].optional !== true)
+		|| pkg.peerDependenciesMeta[dep]?.optional !== true)
 	) {
 		console.error(red(`Peer dependency "${bold(dep)}" is not marked as optional!`));
 		allGood = false;

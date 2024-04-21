@@ -9,7 +9,7 @@ const unocss: ConfigPart = async () => {
 	const config = await interopDefault(import('@unocss/eslint-config/flat'));
 
 	return [
-		config as FlatESLintConfig,
+		config as unknown as FlatESLintConfig,
 	];
 };
 

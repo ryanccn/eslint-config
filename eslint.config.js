@@ -1,6 +1,6 @@
 import { config } from './dist/index.js';
 
 export default config({
-	globals: ['node'],
+	globals: ['es2021', 'node'],
 	stylistic: true,
 });
