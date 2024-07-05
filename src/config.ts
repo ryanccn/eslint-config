@@ -122,7 +122,7 @@ interface UserOptions {
 	 * Extra rule levels and options to specify, overriding the presets previous loaded
 	 * in enabled config parts.
 	 */
-	rules?: Rules;
+	rules?: Partial<Rules>;
 
 	/**
 	 * Extra flat configs that are added to the end.
@@ -151,7 +151,7 @@ interface ResolvedOptions {
 	unocss: boolean;
 	next: boolean;
 	reactHooks: boolean;
-	rules?: Rules;
+	rules?: Partial<Rules>;
 	extraConfigs?: FlatESLintConfig[];
 }
 
