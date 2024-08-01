@@ -6,6 +6,7 @@ import { ensurePackages, interopDefault } from '../utils.js';
 
 import { globs } from '../globs.js';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface TypeScriptOptions extends ParserOptions {}
 
 const typescript: ConfigPart = async (options) => {
@@ -13,7 +14,7 @@ const typescript: ConfigPart = async (options) => {
 
 	const plugin = await interopDefault(import('typescript-eslint'));
 
-	const project = typeof options.typescript === 'boolean' ? true : options.typescript.project ?? true;
+	const projectService = typeof options.typescript === 'boolean' ? true : options.typescript.projectService ?? true;
 	const tsconfigRootDir = typeof options.typescript === 'boolean' ? undefined : options.typescript.tsconfigRootDir;
 
 	const extraFileExtensions = [];
@@ -25,7 +26,7 @@ const typescript: ConfigPart = async (options) => {
 		{
 			languageOptions: {
 				parserOptions: {
-					project,
+					projectService,
 					tsconfigRootDir,
 					extraFileExtensions,
 				},

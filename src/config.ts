@@ -5,7 +5,7 @@ import type { StylisticOptions } from './parts/stylistic.js';
 
 import { globs } from './globs.js';
 
-import globals from 'globals';
+import type globals from 'globals';
 type GlobalName = keyof typeof globals;
 
 interface UserOptions {
