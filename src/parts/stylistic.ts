@@ -24,4 +24,3 @@ const stylistic: ConfigPart = async (options) => {
 };
 
 export { stylistic };
-export { type StylisticCustomizeOptions as StylisticOptions } from '@stylistic/eslint-plugin';

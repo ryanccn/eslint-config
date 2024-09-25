@@ -1,7 +1,7 @@
 import type { FlatESLintConfig, Rules } from 'eslint-define-config';
 
 import type { TypeScriptOptions } from './parts/typescript.js';
-import type { StylisticOptions } from './parts/stylistic.js';
+import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
 import { globs } from './globs.js';
 
@@ -62,7 +62,7 @@ interface UserOptions {
 	 *
 	 * @default false
 	 */
-	stylistic?: boolean | StylisticOptions;
+	stylistic?: boolean | StylisticCustomizeOptions<true>;
 
 	/**
 	 * The [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) config part.
@@ -145,7 +145,7 @@ interface ResolvedOptions {
 	javascript: boolean;
 	typescript: boolean | TypeScriptOptions;
 	unicorn: boolean;
-	stylistic: boolean | StylisticOptions;
+	stylistic: boolean | StylisticCustomizeOptions;
 	prettier: boolean;
 	svelte: boolean;
 	unocss: boolean;

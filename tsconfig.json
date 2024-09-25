@@ -1,26 +1,20 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": false,
-    "noEmit": true,
-    "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo",
-
-    "module": "nodenext",
-    "target": "esnext",
-    "moduleResolution": "nodenext",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
     "resolveJsonModule": true,
-    "jsx": "preserve",
     "moduleDetection": "force",
-
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "strict": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
     "noUncheckedIndexedAccess": true,
-    "skipLibCheck": true
+    "noImplicitOverride": true,
+    "module": "preserve",
+    "noEmit": true,
+    "lib": ["es2022"]
   },
-  "include": ["**/*.ts", "**/*.js"],
-  "exclude": ["dist/**"]
+  "include": ["**/*.js", "**/*.ts"],
+  "exclude": ["node_modules/*", "**/node_modules/*"]
 }

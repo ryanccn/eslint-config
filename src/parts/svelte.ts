@@ -12,8 +12,8 @@ const svelte: ConfigPart = async () => {
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return [
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		...plugin.configs['flat/recommended'],
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
+		...(plugin.configs['flat/recommended'] as any),
 		{
 			files: ['*.svelte', '**/*.svelte'],
 			languageOptions: {

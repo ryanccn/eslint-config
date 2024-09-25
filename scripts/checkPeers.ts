@@ -18,7 +18,7 @@ for (const dep in pkg.peerDependencies) {
 	if (
 		!safelist.has(dep)
 		&& (!(dep in pkg.peerDependenciesMeta)
-		|| pkg.peerDependenciesMeta[dep]?.optional !== true)
+			|| pkg.peerDependenciesMeta[dep]?.optional !== true)
 	) {
 		console.error(red(`Peer dependency "${bold(dep)}" is not marked as optional!`));
 		allGood = false;

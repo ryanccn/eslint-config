@@ -40,4 +40,4 @@ const typescript: ConfigPart = async (options) => {
 	];
 };
 
-export { typescript, TypeScriptOptions };
+export { typescript, type TypeScriptOptions };

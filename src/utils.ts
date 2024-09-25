@@ -1,5 +1,5 @@
 import { isPackageExists } from 'local-pkg';
-import { bold, dim, yellow } from 'kleur/colors';
+import { bold, dim, red } from 'kleur/colors';
 
 export const logPrefix = dim('[@ryanccn/eslint-config]');
 
@@ -8,7 +8,7 @@ export const ensurePackages = (pkg: string | string[]) => {
 
 	for (const p of pkg)
 		if (!isPackageExists(p)) {
-			console.error(`${logPrefix}  ${yellow('Required peer dependency')} ${yellow(bold(p))} ${yellow('is not installed!')}`);
+			console.error(`${logPrefix}  ${red('Required peer dependency')} ${red(bold(p))} ${red('is not installed!')}`);
 		}
 };
 
