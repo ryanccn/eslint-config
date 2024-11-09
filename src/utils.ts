@@ -1,14 +1,14 @@
 import { isPackageExists } from 'local-pkg';
-import { bold, dim, red } from 'kleur/colors';
+import c from 'tinyrainbow';
 
-export const logPrefix = dim('[@ryanccn/eslint-config]');
+export const logPrefix = c.dim('[@ryanccn/eslint-config]');
 
 export const ensurePackages = (pkg: string | string[]) => {
 	if (typeof pkg === 'string') pkg = [pkg];
 
 	for (const p of pkg)
 		if (!isPackageExists(p)) {
-			console.error(`${logPrefix}  ${red('Required peer dependency')} ${red(bold(p))} ${red('is not installed!')}`);
+			console.error(`${logPrefix}  ${c.red('Required peer dependency')} ${c.red(c.bold(p))} ${c.red('is not installed!')}`);
 		}
 };
 

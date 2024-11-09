@@ -2,11 +2,11 @@ import type { UserOptions } from './config.js';
 
 import { isPackageExists } from 'local-pkg';
 import { logPrefix } from './utils.js';
-import { bold, dim, yellow } from 'kleur/colors';
+import c from 'tinyrainbow';
 
 const suggestPart = (name: string, readableName: string) => {
-	console.warn(`${logPrefix}  ${yellow(`The ${readableName} config part can be enabled with `)}${bold(yellow(`\`${name}: true\``))}${yellow('!')}`);
-	console.warn(`${logPrefix}  ${dim(`Disable this suggestion by setting \`${name}: false\`.`)}`);
+	console.warn(`${logPrefix}  ${c.yellow(`The ${readableName} config part can be enabled with `)}${c.bold(c.yellow(`\`${name}: true\``))}${c.yellow('!')}`);
+	console.warn(`${logPrefix}  ${c.dim(`Disable this suggestion by setting \`${name}: false\`.`)}`);
 };
 
 export const autoDetect = (options?: UserOptions) => {

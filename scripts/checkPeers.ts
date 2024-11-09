@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-process-exit */
 
-import { bold, green, red } from 'kleur/colors';
+import c from 'tinyrainbow';
 import { readFile } from 'node:fs/promises';
 
 interface PackageJson {
@@ -20,17 +20,28 @@ for (const dep in pkg.peerDependencies) {
 		&& (!(dep in pkg.peerDependenciesMeta)
 			|| pkg.peerDependenciesMeta[dep]?.optional !== true)
 	) {
-		console.error(red(`Peer dependency "${bold(dep)}" is not marked as optional!`));
+		console.error(`Peer dependency \`${c.bold(dep)}\` is not marked as optional!`);
+		allGood = false;
+	}
+}
+
+for (const [dep, version] of Object.entries(pkg.peerDependencies)) {
+	if (version !== '*') {
+		console.error(`Peer dependency \`${c.bold(dep)}\` version is not \`*\`!`);
 		allGood = false;
 	}
 }
 
 for (const dep in pkg.peerDependenciesMeta) {
 	if (!(dep in pkg.peerDependencies)) {
-		console.error(red(`Nonexistent peer dependency "${bold(dep)}" is marked as optional!`));
+		console.error(`Nonexistent peer dependency \`${c.bold(dep)}\` is marked as optional!`);
 		allGood = false;
 	}
 }
 
-if (allGood) console.error(green('All good!'));
-else process.exit(1);
+if (allGood) {
+	console.error(c.green('All good!'));
+} else {
+	console.error(c.red('Issues detected!'));
+	process.exit(1);
+}
