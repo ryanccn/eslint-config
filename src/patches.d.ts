@@ -1,36 +1,30 @@
-declare module '@eslint/js' {
-	import type { FlatESLintConfig } from 'eslint-define-config';
+import type { Linter } from 'eslint';
 
-	const configs: Record<'recommended' | 'all', Required<FlatESLintConfig>>;
+declare module '@eslint/js' {
+	const configs: Record<'recommended' | 'all', Linter.Config>;
 	export default { configs };
 }
 
 declare module 'eslint-plugin-unicorn' {
-	import type { FlatESLintConfig } from 'eslint-define-config';
-
-	const configs: Record<'recommended' | 'flat/recommended', Required<FlatESLintConfig>>;
+	const configs: Record<'recommended' | 'flat/recommended', Linter.Config>;
 	export default { configs };
 }
 
 declare module 'eslint-config-prettier' {
-	import type { FlatESLintConfig } from 'eslint-define-config';
-
-	const config: Required<FlatESLintConfig>;
+	const config: Linter.Config;
 	export default config;
 }
 
 declare module '@eslint/eslintrc' {
-	import type { FlatESLintConfig } from 'eslint-define-config';
-
 	class FlatCompat {
 		constructor(opts: {
 			baseDirectory?: string;
 			resolvePluginsRelativeTo?: string;
 		});
 
-		config(config: unknown): FlatESLintConfig[];
-		extends(...id: string[]): FlatESLintConfig[];
-		plugins(...id: string[]): FlatESLintConfig[];
+		config(config: unknown): Linter.Config[];
+		extends(...id: string[]): Linter.Config[];
+		plugins(...id: string[]): Linter.Config[];
 	}
 
 	export { FlatCompat };

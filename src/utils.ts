@@ -8,7 +8,7 @@ export const ensurePackages = (pkg: string | string[]) => {
 
 	for (const p of pkg)
 		if (!isPackageExists(p)) {
-			console.error(`${logPrefix}  ${c.red('Required peer dependency')} ${c.red(c.bold(p))} ${c.red('is not installed!')}`);
+			console.error(`${logPrefix} ${c.red('Required peer dependency')} ${c.red(c.bold(p))} ${c.red('is not installed!')}`);
 		}
 };
 

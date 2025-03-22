@@ -1,6 +1,6 @@
 {
   "name": "@ryanccn/eslint-config",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "type": "module",
   "description": "A personal ESLint flat config preset",
   "license": "MIT",
@@ -27,16 +27,15 @@
   "scripts": {
     "watch": "tsup --watch",
     "build": "tsup",
-    "check": "tsc -noEmit",
+    "check": "tsc --noEmit",
     "lint": "eslint .",
     "check-peers": "tsx scripts/checkPeers.ts"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^8.13.0",
-    "eslint-define-config": "^2.1.0",
-    "globals": "^15.12.0",
-    "local-pkg": "^0.5.0",
-    "tinyrainbow": "^1.2.0"
+    "@typescript-eslint/utils": "^8.27.0",
+    "globals": "^16.0.0",
+    "local-pkg": "^1.1.1",
+    "tinyrainbow": "^2.0.0"
   },
   "peerDependencies": {
     "@eslint/eslintrc": "*",
@@ -55,27 +54,27 @@
     "typescript-eslint": "*"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.14.0",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.23.0",
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
-    "@next/eslint-plugin-next": "^15.0.3",
-    "@stylistic/eslint-plugin": "^2.10.1",
+    "@next/eslint-plugin-next": "^15.2.3",
+    "@stylistic/eslint-plugin": "^4.2.0",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^22.9.0",
-    "@typescript-eslint/parser": "^8.13.0",
-    "@unocss/eslint-config": "0.64.0",
-    "eslint": "^9.14.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-svelte": "^2.46.0",
-    "eslint-plugin-unicorn": "^56.0.0",
-    "eslint-typegen": "^0.3.2",
-    "svelte": "^5.1.13",
-    "svelte-eslint-parser": "^0.43.0",
-    "tsup": "^8.3.5",
-    "tsx": "^4.19.2",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.13.0"
+    "@types/node": "^22.13.11",
+    "@typescript-eslint/parser": "^8.27.0",
+    "@unocss/eslint-config": "66.0.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-svelte": "^3.3.3",
+    "eslint-plugin-unicorn": "^57.0.0",
+    "eslint-typegen": "^2.1.0",
+    "svelte": "^5.25.2",
+    "svelte-eslint-parser": "^1.1.0",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.27.0"
   },
   "peerDependenciesMeta": {
     "@eslint/eslintrc": {
@@ -118,5 +117,10 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "packageManager": "pnpm@10.6.5+sha512.cdf928fca20832cd59ec53826492b7dc25dc524d4370b6b4adbf65803d32efaa6c1c88147c0ae4e8d579a6c9eec715757b50d4fa35eea179d868eada4ed043af"
 }

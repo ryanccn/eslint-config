@@ -5,8 +5,8 @@ import { logPrefix } from './utils.js';
 import c from 'tinyrainbow';
 
 const suggestPart = (name: string, readableName: string) => {
-	console.warn(`${logPrefix}  ${c.yellow(`The ${readableName} config part can be enabled with `)}${c.bold(c.yellow(`\`${name}: true\``))}${c.yellow('!')}`);
-	console.warn(`${logPrefix}  ${c.dim(`Disable this suggestion by setting \`${name}: false\`.`)}`);
+	console.warn(`${logPrefix} ${c.yellow(`The ${readableName} config part can be enabled with `)}${c.bold(c.yellow(`\`${name}: true\``))}${c.yellow('!')}`);
+	console.warn(`${logPrefix} ${c.dim(`Disable this suggestion by setting \`${name}: false\`.`)}`);
 };
 
 export const autoDetect = (options?: UserOptions) => {

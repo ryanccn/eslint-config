@@ -1,6 +1,6 @@
 import type { ConfigPart } from './_types.js';
+import type { Linter } from 'eslint';
 import type { ParserOptions } from '@typescript-eslint/utils/ts-eslint';
-import type { FlatESLintConfig } from 'eslint-define-config';
 
 import { ensurePackages, interopDefault } from '../utils.js';
 
@@ -21,7 +21,7 @@ const typescript: ConfigPart = async (options) => {
 	if (options.svelte === true) extraFileExtensions.push('.svelte');
 
 	return [
-		...plugin.configs.recommendedTypeChecked as FlatESLintConfig[],
+		...plugin.configs.recommendedTypeChecked as Linter.Config[],
 
 		{
 			languageOptions: {

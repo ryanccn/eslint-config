@@ -1,5 +1,4 @@
-import type { FlatESLintConfig, Rules } from 'eslint-define-config';
-
+import type { Linter } from 'eslint';
 import type { TypeScriptOptions } from './parts/typescript.js';
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
@@ -62,7 +61,7 @@ interface UserOptions {
 	 *
 	 * @default false
 	 */
-	stylistic?: boolean | StylisticCustomizeOptions<true>;
+	stylistic?: boolean | StylisticCustomizeOptions;
 
 	/**
 	 * The [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) config part.
@@ -122,7 +121,7 @@ interface UserOptions {
 	 * Extra rule levels and options to specify, overriding the presets previous loaded
 	 * in enabled config parts.
 	 */
-	rules?: Partial<Rules>;
+	rules?: Partial<Linter.RulesRecord>;
 
 	/**
 	 * Extra flat configs that are added to the end.
@@ -136,7 +135,7 @@ interface UserOptions {
 	 * ]
 	 * ```
 	 */
-	extraConfigs?: FlatESLintConfig[];
+	extraConfigs?: Linter.Config[];
 }
 
 interface ResolvedOptions {
@@ -151,8 +150,8 @@ interface ResolvedOptions {
 	unocss: boolean;
 	next: boolean;
 	reactHooks: boolean;
-	rules?: Partial<Rules>;
-	extraConfigs?: FlatESLintConfig[];
+	rules?: Partial<Linter.RulesRecord>;
+	extraConfigs?: Linter.Config[];
 }
 
 const resolveOptions = (options?: UserOptions): ResolvedOptions => {

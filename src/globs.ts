@@ -1,7 +1,6 @@
 export const globs = {
 	javascript: ['**/*.{js,mjs,cjs}'],
 	typescript: ['**/*.{ts,mts,cts}'],
-
 	svelte: ['**/*.svelte'],
 
 	ignore: [
@@ -17,12 +16,12 @@ export const globs = {
 		'**/.nuxt',
 		'**/.vercel',
 		'**/.changeset',
+		'**/.wrangler',
 		'**/.cache',
 		'**/.output',
 
 		'**/.vscode',
 		'**/.idea',
-
-		'**/LICENSE*',
+		'**/.zed',
 	],
 };

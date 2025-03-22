@@ -1,4 +1,4 @@
-import type { FlatESLintConfig, LanguageOptions } from 'eslint-define-config';
+import type { Linter } from 'eslint';
 
 import { autoDetect } from './autoDetect.js';
 
@@ -17,8 +17,8 @@ import { next } from './parts/next.js';
 import { resolveOptions, type UserOptions, type GlobalName } from './config.js';
 import globals from 'globals';
 
-const getGlobals = (names: GlobalName[]): LanguageOptions['globals'] => {
-	let thisGlobals: LanguageOptions['globals'] = {};
+const getGlobals = (names: GlobalName[]): Linter.Globals => {
+	let thisGlobals: Linter.Globals = {};
 
 	for (const global of names) {
 		thisGlobals = { ...thisGlobals, ...globals[global] };
@@ -28,21 +28,23 @@ const getGlobals = (names: GlobalName[]): LanguageOptions['globals'] => {
 };
 
 const pushPart = async (
-	configArray: FlatESLintConfig[],
-	newConfigs: FlatESLintConfig[] | Promise<FlatESLintConfig[]>,
+	configArray: Linter.Config[],
+	newConfigs: Linter.Config[] | Promise<Linter.Config[]>,
 ) => {
 	const resolvedNewConfigs = await newConfigs;
 	configArray.push(...resolvedNewConfigs);
 };
 
-const config = async (options?: UserOptions): Promise<FlatESLintConfig[]> => {
+const config = async (options?: UserOptions): Promise<Linter.Config[]> => {
 	autoDetect(options);
 	const resolvedOptions = resolveOptions(options);
 
-	const ret: FlatESLintConfig[] = [];
+	const ret: Linter.Config[] = [];
 
 	if (resolvedOptions.ignores && resolvedOptions.ignores.length > 0) {
-		ret.push({ ignores: resolvedOptions.ignores });
+		ret.push({
+			ignores: resolvedOptions.ignores,
+		});
 	}
 
 	if (resolvedOptions.globals && resolvedOptions.globals.length > 0) {

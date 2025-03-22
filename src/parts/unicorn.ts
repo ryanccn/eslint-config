@@ -8,7 +8,7 @@ const unicorn: ConfigPart = async () => {
 	const plugin = await interopDefault(import('eslint-plugin-unicorn'));
 
 	return [
-		plugin.configs['flat/recommended'],
+		plugin.configs['recommended'],
 
 		{
 			rules: {
