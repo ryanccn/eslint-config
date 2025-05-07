@@ -7,7 +7,6 @@ const stylistic: ConfigPart = async (options) => {
 
 	const plugin = await interopDefault(import('@stylistic/eslint-plugin'));
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return [
 		plugin.configs.customize({
 			indent: 'tab',
@@ -19,8 +18,7 @@ const stylistic: ConfigPart = async (options) => {
 
 			...(typeof options.stylistic === 'boolean' ? {} : options.stylistic),
 		}),
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	] as any;
+	];
 };
 
 export { stylistic };

@@ -8,8 +8,7 @@ const unicorn: ConfigPart = async () => {
 	const plugin = await interopDefault(import('eslint-plugin-unicorn'));
 
 	return [
-		plugin.configs['recommended'],
-
+		plugin.configs.recommended,
 		{
 			rules: {
 				'unicorn/prevent-abbreviations': 'off',

@@ -78,7 +78,7 @@ interface UserOptions {
 	/**
 	 * The Svelte config part, based on [`eslint-plugin-svelte`](https://github.com/sveltejs/eslint-plugin-svelte).
 	 *
-	 * **Peer dependencies:** `eslint-plugin-svelte`, `svelte-eslint-parser`, `typescript-eslint`, `svelte`
+	 * **Peer dependencies:** `eslint-plugin-svelte`, `typescript-eslint`, `svelte`
 	 *
 	 * @default false
 	 */
@@ -108,10 +108,7 @@ interface UserOptions {
 	/**
 	 * The React Hooks config part, based on [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks).
 	 *
-	 * This part is loaded via [`FlatCompat`](https://eslint.org/docs/latest/use/configure/migration-guide#using-eslintrc-configs-in-flat-config)
-	 * provided by `@eslint/eslintrc`.
-	 *
-	 * **Peer dependencies:** `eslint-plugin-react-hooks`, `@eslint/eslintrc`
+	 * **Peer dependencies:** `eslint-plugin-react-hooks`
 	 *
 	 * @default false
 	 */

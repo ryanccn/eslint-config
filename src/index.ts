@@ -15,7 +15,11 @@ import { reactHooks } from './parts/reactHooks.js';
 import { next } from './parts/next.js';
 
 import { resolveOptions, type UserOptions, type GlobalName } from './config.js';
+import { exists } from './utils.js';
+
+import { includeIgnoreFile } from '@eslint/compat';
 import globals from 'globals';
+import path from 'node:path';
 
 const getGlobals = (names: GlobalName[]): Linter.Globals => {
 	let thisGlobals: Linter.Globals = {};
@@ -45,6 +49,12 @@ const config = async (options?: UserOptions): Promise<Linter.Config[]> => {
 		ret.push({
 			ignores: resolvedOptions.ignores,
 		});
+	}
+
+	const gitignore = path.join(process.cwd(), '.gitignore');
+
+	if (await exists(gitignore)) {
+		ret.push(includeIgnoreFile(gitignore));
 	}
 
 	if (resolvedOptions.globals && resolvedOptions.globals.length > 0) {

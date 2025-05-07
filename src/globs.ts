@@ -1,7 +1,7 @@
 export const globs = {
 	javascript: ['**/*.{js,mjs,cjs}'],
 	typescript: ['**/*.{ts,mts,cts}'],
-	svelte: ['**/*.svelte'],
+	svelte: ['**/*.svelte', '**/*.svelte.{js,mjs,cjs,ts,mts,cts}'],
 
 	ignore: [
 		'**/node_modules',
@@ -10,18 +10,17 @@ export const globs = {
 		'**/package-lock.json',
 		'**/yarn.lock',
 		'**/pnpm-lock.yaml',
+		'**/bun.lock',
 		'**/bun.lockb',
 
 		'**/.next',
 		'**/.nuxt',
-		'**/.vercel',
+		'**/.svelte-kit',
 		'**/.changeset',
+		'**/.vercel',
 		'**/.wrangler',
 		'**/.cache',
 		'**/.output',
-
-		'**/.vscode',
-		'**/.idea',
-		'**/.zed',
+		'**/coverage',
 	],
 };

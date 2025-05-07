@@ -1,25 +1,24 @@
 import type { ConfigPart } from './_types.js';
 
 import { ensurePackages, interopDefault } from '../utils.js';
+import { globs } from '../globs.js';
 
 const svelte: ConfigPart = async () => {
-	ensurePackages(['eslint-plugin-svelte', 'svelte-eslint-parser', 'typescript-eslint', 'svelte']);
+	ensurePackages(['eslint-plugin-svelte', 'typescript-eslint', 'svelte']);
 
 	const plugin = await interopDefault(import('eslint-plugin-svelte'));
 
-	const svelteParser = await interopDefault(import('svelte-eslint-parser'));
-	const tsParser = await interopDefault(import('@typescript-eslint/parser'));
+	const typescriptPlugin = await interopDefault(import('typescript-eslint'));
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return [
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-		...(plugin.configs['flat/recommended'] as any),
+		...plugin.configs.recommended,
 		{
-			files: ['*.svelte', '**/*.svelte'],
+			files: globs.svelte,
 			languageOptions: {
-				parser: svelteParser,
 				parserOptions: {
-					parser: tsParser,
+					parser: typescriptPlugin.parser,
+					projectService: true,
+					extraFileExtensions: ['.svelte'],
 				},
 			},
 		},

@@ -1,3 +1,4 @@
+import { access, constants } from 'node:fs/promises';
 import { isPackageExists } from 'local-pkg';
 import c from 'tinyrainbow';
 
@@ -16,4 +17,13 @@ export const interopDefault = async <T>(module: T | Promise<T>): Promise<T exten
 	const resolved = await module;
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
 	return (resolved as any).default ?? resolved;
+};
+
+export const exists = async (path: string): Promise<boolean> => {
+	try {
+		await access(path, constants.R_OK);
+		return true;
+	} catch {
+		return false;
+	}
 };
