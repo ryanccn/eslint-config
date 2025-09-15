@@ -58,7 +58,7 @@
     "@next/eslint-plugin-next": "^15.3.2",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@types/eslint": "^9.6.1",
-    "@types/node": "^22.15.14",
+    "@types/node": "^24.4.0",
     "@unocss/eslint-config": "66.1.0",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^10.1.3",
