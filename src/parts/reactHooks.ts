@@ -8,7 +8,7 @@ const reactHooks: ConfigPart = async () => {
 	const plugin = await interopDefault(import('eslint-plugin-react-hooks'));
 
 	return [
-		plugin.configs['recommended-latest'],
+		plugin.configs.flat.recommended,
 	];
 };
 
