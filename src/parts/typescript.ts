@@ -18,7 +18,7 @@ const typescript: ConfigPart = async (options) => {
 	const tsconfigRootDir = typeof options.typescript === 'boolean' ? undefined : options.typescript.tsconfigRootDir;
 
 	const extraFileExtensions = [];
-	if (options.svelte === true) extraFileExtensions.push('.svelte');
+	if (options.svelte) extraFileExtensions.push('.svelte');
 
 	return [
 		...plugin.configs.recommendedTypeChecked as Linter.Config[],

@@ -96,10 +96,7 @@ interface UserOptions {
 	/**
 	 * The Next.js config part, based on [`@next/eslint-plugin-next`](https://nextjs.org/docs/pages/building-your-application/configuring/eslint#eslint-plugin).
 	 *
-	 * This part is loaded via [`FlatCompat`](https://eslint.org/docs/latest/use/configure/migration-guide#using-eslintrc-configs-in-flat-config)
-	 * provided by `@eslint/eslintrc`.
-	 *
-	 * **Peer dependencies:** `@next/eslint-plugin-next`, `@eslint/eslintrc`
+	 * **Peer dependencies:** `@next/eslint-plugin-next`
 	 *
 	 * @default false
 	 */

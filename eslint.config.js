@@ -1,4 +1,4 @@
-import { config } from './dist/index.js';
+import { config } from './dist/index.mjs';
 
 export default config({
 	globals: ['es2025', 'node'],

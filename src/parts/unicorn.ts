@@ -15,6 +15,11 @@ const unicorn: ConfigPart = async () => {
 				'unicorn/no-null': 'off',
 				'unicorn/filename-case': 'off',
 				'unicorn/no-nested-ternary': 'off',
+				'unicorn/import-style': 'off',
+				'unicorn/name-replacements': 'off',
+				'unicorn/consistent-boolean-name': 'off',
+				'unicorn/prefer-await': 'off',
+				'unicorn/single-line-block-comment-style': 'off',
 			},
 		},
 	];

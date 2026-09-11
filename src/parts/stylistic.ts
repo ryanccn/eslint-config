@@ -16,7 +16,7 @@ const stylistic: ConfigPart = async (options) => {
 			arrowParens: true,
 			braceStyle: '1tbs',
 
-			...(typeof options.stylistic === 'boolean' ? {} : options.stylistic),
+			...(typeof options.stylistic !== 'boolean' && options.stylistic),
 		}),
 	];
 };

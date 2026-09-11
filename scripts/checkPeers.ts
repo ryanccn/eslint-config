@@ -15,28 +15,30 @@ const safelist = new Set(['eslint']);
 let allGood = true;
 
 for (const dep in pkg.peerDependencies) {
-	if (
-		!safelist.has(dep)
-		&& (!(dep in pkg.peerDependenciesMeta)
-			|| pkg.peerDependenciesMeta[dep]?.optional !== true)
-	) {
-		console.error(`Peer dependency \`${c.bold(dep)}\` is not marked as optional!`);
-		allGood = false;
+	if (safelist.has(dep) || (pkg.peerDependenciesMeta[dep]?.optional === true)) {
+		continue;
 	}
+
+	console.error(`Peer dependency \`${c.bold(dep)}\` is not marked as optional!`);
+	allGood = false;
 }
 
 for (const [dep, version] of Object.entries(pkg.peerDependencies)) {
-	if (version !== '*') {
-		console.error(`Peer dependency \`${c.bold(dep)}\` version is not \`*\`!`);
-		allGood = false;
+	if (version === '*') {
+		continue;
 	}
+
+	console.error(`Peer dependency \`${c.bold(dep)}\` version is not \`*\`!`);
+	allGood = false;
 }
 
 for (const dep in pkg.peerDependenciesMeta) {
-	if (!(dep in pkg.peerDependencies)) {
-		console.error(`Nonexistent peer dependency \`${c.bold(dep)}\` is marked as optional!`);
-		allGood = false;
+	if (pkg.peerDependencies[dep] !== undefined) {
+		continue;
 	}
+
+	console.error(`Nonexistent peer dependency \`${c.bold(dep)}\` is marked as optional!`);
+	allGood = false;
 }
 
 if (allGood) {

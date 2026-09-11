@@ -17,7 +17,7 @@ import { next } from './parts/next.js';
 import { resolveOptions, type UserOptions, type GlobalName } from './config.js';
 import { exists } from './utils.js';
 
-import { includeIgnoreFile } from '@eslint/compat';
+import { includeIgnoreFile } from 'eslint/config';
 import globals from 'globals';
 import path from 'node:path';
 
@@ -65,7 +65,7 @@ const config = async (options?: UserOptions): Promise<Linter.Config[]> => {
 		});
 	}
 
-	if (resolvedOptions.javascript !== false) {
+	if (resolvedOptions.javascript) {
 		await pushPart(ret, javascript(resolvedOptions));
 	}
 
@@ -73,23 +73,23 @@ const config = async (options?: UserOptions): Promise<Linter.Config[]> => {
 		await pushPart(ret, typescript(resolvedOptions));
 	}
 
-	if (resolvedOptions.unicorn !== false) {
+	if (resolvedOptions.unicorn) {
 		await pushPart(ret, unicorn(resolvedOptions));
 	}
 
-	if (resolvedOptions.svelte !== false) {
+	if (resolvedOptions.svelte) {
 		await pushPart(ret, svelte(resolvedOptions));
 	}
 
-	if (resolvedOptions.unocss !== false) {
+	if (resolvedOptions.unocss) {
 		await pushPart(ret, unocss(resolvedOptions));
 	}
 
-	if (resolvedOptions.next !== false) {
+	if (resolvedOptions.next) {
 		await pushPart(ret, next(resolvedOptions));
 	}
 
-	if (resolvedOptions.reactHooks !== false) {
+	if (resolvedOptions.reactHooks) {
 		await pushPart(ret, reactHooks(resolvedOptions));
 	}
 
@@ -97,7 +97,7 @@ const config = async (options?: UserOptions): Promise<Linter.Config[]> => {
 		await pushPart(ret, stylistic(resolvedOptions));
 	}
 
-	if (resolvedOptions.prettier !== false) {
+	if (resolvedOptions.prettier) {
 		await pushPart(ret, prettier(resolvedOptions));
 	}
 
