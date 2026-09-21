@@ -14,6 +14,7 @@ const typescript: ConfigPart = async (options) => {
 
 	const plugin = await interopDefault(import('typescript-eslint'));
 
+	// eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary
 	const projectService = typeof options.typescript === 'boolean' ? true : options.typescript.projectService ?? true;
 	const tsconfigRootDir = typeof options.typescript === 'boolean' ? undefined : options.typescript.tsconfigRootDir;
 

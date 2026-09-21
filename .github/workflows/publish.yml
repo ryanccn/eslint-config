@@ -27,4 +27,4 @@ jobs:
         run: pnpm run prepare-publish
 
       - name: Publish
-        run: pnpm publish --access public --provenance --no-git-checks
+        run: pnpm publish --access public --provenance --no-git-checks dist

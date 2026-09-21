@@ -1,6 +1,6 @@
 {
   "name": "@ryanccn/eslint-config",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "type": "module",
   "description": "A personal ESLint flat config preset",
   "license": "MIT",
