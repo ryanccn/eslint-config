@@ -1,7 +1,6 @@
 import type { UserOptions } from './config.js';
 
-import { isPackageExists } from 'local-pkg';
-import { logPrefix } from './utils.js';
+import { logPrefix, packageExists } from './utils.js';
 import c from 'tinyrainbow';
 
 const suggestPart = (name: string, readableName: string) => {
@@ -10,15 +9,15 @@ const suggestPart = (name: string, readableName: string) => {
 };
 
 export const autoDetect = (options?: UserOptions) => {
-	if (isPackageExists('svelte') && options?.svelte === undefined)
+	if (packageExists('svelte') && options?.svelte === undefined)
 		suggestPart('svelte', 'Svelte');
 
-	if (isPackageExists('unocss') && options?.unocss === undefined)
+	if (packageExists('unocss') && options?.unocss === undefined)
 		suggestPart('unocss', 'UnoCSS');
 
-	if (isPackageExists('next') && options?.next === undefined)
+	if (packageExists('next') && options?.next === undefined)
 		suggestPart('next', 'Next.js');
 
-	if (isPackageExists('react') && options?.reactHooks === undefined)
+	if (packageExists('react') && options?.reactHooks === undefined)
 		suggestPart('reactHooks', 'React Hooks');
 };

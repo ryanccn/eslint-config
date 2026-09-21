@@ -1,14 +1,23 @@
 import { access, constants } from 'node:fs/promises';
-import { isPackageExists } from 'local-pkg';
 import c from 'tinyrainbow';
 
 export const logPrefix = c.dim('[@ryanccn/eslint-config]');
+
+export const packageExists = (pkg: string) => {
+	try {
+		import.meta.resolve(pkg);
+	} catch {
+		return false;
+	}
+
+	return true;
+};
 
 export const ensurePackages = (pkg: string | string[]) => {
 	if (typeof pkg === 'string') pkg = [pkg];
 
 	for (const p of pkg)
-		if (!isPackageExists(p)) {
+		if (!packageExists(p)) {
 			console.error(`${logPrefix} ${c.red('Required peer dependency')} ${c.red(c.bold(p))} ${c.red('is not installed!')}`);
 		}
 };

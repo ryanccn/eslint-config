@@ -18,12 +18,13 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # ratchet:actions/checkout@v7
 
       - name: Setup and install dependencies
-        uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # ratchet:pnpm/setup@v2
+        uses: pnpm/setup@fbda4c85fc2e1e08721cd8763afea8f48d60f024 # ratchet:pnpm/setup@v3
 
       - name: Build
         run: pnpm run build
 
+      - name: Prepare for publish
+        run: pnpm run prepare-publish
+
       - name: Publish
-        env:
-          NPM_CONFIG_PROVENANCE: true
-        run: pnpm publish --access public --no-git-checks
+        run: pnpm publish --access public --provenance --no-git-checks
