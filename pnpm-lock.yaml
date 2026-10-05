@@ -178,7 +178,7 @@ importers:
         version: 10.0.1(eslint@10.11.0(jiti@2.6.1)(supports-color@7.2.0))
       '@next/eslint-plugin-next':
         specifier: ^16.3.5
-        version: 16.3.5(eslint@10.11.0(jiti@2.6.1)(supports-color@7.2.0))
+        version: 16.3.8(eslint@10.11.0(jiti@2.6.1)(supports-color@7.2.0))
       '@stylistic/eslint-plugin':
         specifier: ^5.10.0
         version: 5.10.0(eslint@10.11.0(jiti@2.6.1)(supports-color@7.2.0))
@@ -408,8 +408,8 @@ packages:
   '@napi-rs/wasm-runtime@1.0.7':
     resolution: {integrity: sha512-SeDnOO0Tk7Okiq6DbXmmBODgOAb9dp9gjlphokTUxmt8U3liIP1ZsozBahH69j/RJv+Rfs6IwUKHTgQYJ/HBAw==}
 
-  '@next/eslint-plugin-next@16.3.5':
-    resolution: {integrity: sha512-PGfSeItHJ12DH8t+6sEbuMe59NE5rAhCfgk06QKTH2ne9VUL1JlaXdYXY3B8RaiF2SO50rDYvd39TulP6A6xZQ==}
+  '@next/eslint-plugin-next@16.3.8':
+    resolution: {integrity: sha512-eCR9RcLTZrVS+K3+VOhi0xMdUUGNuriCHHhU1ZoABC/QQ/Gp0OWbLKQxV2/9DkmihYdYRcQWFmZXW8M1AMUXYw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2064,7 +2064,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@next/eslint-plugin-next@16.3.5(eslint@10.11.0(jiti@2.6.1)(supports-color@7.2.0))':
+  '@next/eslint-plugin-next@16.3.8(eslint@10.11.0(jiti@2.6.1)(supports-color@7.2.0))':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.11.0(jiti@2.6.1)(supports-color@7.2.0))
       fast-glob: 3.3.1
